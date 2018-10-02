@@ -12,4 +12,11 @@ describe 'navigate' do
       expect(page).to have_content(/List of Students/)
     end
   end
+
+  describe "creation of a student" do
+    it 'has a new form that can be reached' do
+      visit new_cohort_path
+      expect(page.status_code).to eq(200)
+    end
+  end
 end

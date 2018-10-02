@@ -1,17 +1,36 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe "creation" do
+  describe 'creation' do
     before do
-      @user = User.create(email: "test@test.com", password: "123123", password_confirmation: "123123", first_name: "John", last_name: "Snow")
+      @user = User.create(email: "test@test.com", password: "password", password_confirmation: "password", first_name: "Jon", last_name: "Snow", username: "watcheronthewall", age: "34", education: "BS")
     end
-    it "can be created" do  
+
+    it 'should be able to be created if valid' do
       expect(@user).to be_valid
     end
-    it "cannot be created without first name and last name" do
-      @user.first_name = nil
-      @user.last_name = nil
+
+    it 'should have a default role of: student' do
+      expect(@user.role).to eq('student')
+    end
+
+    it 'ensure that all usernames are unique' do
+      duplicate_username_user = User.create(email: "test2@test.com", password: "password", password_confirmation: "password", first_name: "Joni", last_name: "Snowy", username: "watcheronthewall")
+      expect(duplicate_username_user).to_not be_valid
+    end
+
+    it 'should ensure that usernames do not allow special characters' do
+      @user.username = "*#*(@!"
       expect(@user).to_not be_valid
+    end
+
+    describe 'validations' do
+      it 'should not be valid without a first, last names, age, education' do
+        @user.first_name = nil
+        @user.last_name = nil
+        @user.username = nil
+        expect(@user).to_not be_valid
+      end
     end
   end
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Cohort, type: :model do
   describe "creation" do
     before do
-      @cohort = Cohort.create(cohort_name: "sei", start_date: Date.today, end_date: :date)
+      @cohort = Cohort.create(cohort_name: "sei", start_date: Date.today, end_date: Date.today)
     end
 
     it "can be created" do

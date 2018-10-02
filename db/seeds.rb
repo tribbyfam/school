@@ -1,5 +1,5 @@
 5.times do |cohort|
-  Cohort.create!(cohort_name: "#{cohort} sei", start_date: Date.today, end_date: Date.tomorrow, instructor_id: "1", student_id: "#{cohort}")
+  Cohort.create!(cohort_name: "#{cohort} sei", start_date: :date, end_date: :date, instructor_id: "1", student_id: "#{cohort}")
 end
 
 puts "5 cohorts has been created"
